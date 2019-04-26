@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="viewmodel"
+                  type="com.example.memo.ui.firsttab.PopUpViewModel"/>
+    </data>
+
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:background="#E2E0E0"
+        android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/itemholder"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_text_popup"
+            android:layout_height="match_parent" android:layout_marginTop="8dp" android:layout_alignParentTop="true">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:onClick="@{(v)->viewmodel.addClick(v)}"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_add_black_24dp"
+            android:layout_alignParentRight="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:id="@+id/playbutton"
+            android:src="@drawable/ic_play_arrow_black_24dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="@{(v)->viewmodel.playClick(v)}"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"/>
+
+</RelativeLayout>
+</layout>

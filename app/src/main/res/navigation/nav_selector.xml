@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_selector"
+            app:startDestination="@id/popupFragment">
+
+    <fragment android:id="@+id/popupFragment"
+              android:name="com.example.memo.ui.firsttab.PopupFragment"
+              tools:layout="@layout/layout_popup"
+              android:label="First"/>
+    <fragment android:id="@+id/settingFragment"
+              android:name="com.example.memo.ui.menu.settings.SettingFragment"
+              tools:layout="@layout/layout_settings"
+              android:label="SettingFragment"/>
+
+    <fragment android:id="@+id/songFragment"
+              android:name="com.example.memo.ui.secondtab.SongFragment"
+              tools:layout="@layout/layout_songs"
+              android:label="SongFragment"/>
+
+    <fragment android:id="@+id/placeholder"
+              tools:layout="@layout/activity_main"/>
+
+    <fragment android:id="@+id/sampleMessageFragment"
+              android:name="com.example.memo.ui.menu.samples.SampleMessageFragment"
+              tools:layout="@layout/layout_sample_message"
+              android:label="SampleMessageFragment"/>
+
+    <fragment android:id="@+id/docsFragment"
+              android:name="com.example.memo.ui.menu.docs.DocsFragment"
+              tools:layout="@layout/layout_documentation"
+              android:label="DocsFragment"/>
+
+    <fragment android:id="@+id/aboutFragment"
+              android:name="com.example.memo.ui.menu.about.AboutFragment"
+              tools:layout="@layout/layout_about"
+              android:label="AboutFragment"/>
+
+    <fragment android:id="@+id/bineuralFragment"
+              android:name="com.example.memo.ui.thirdtab.BineuralFragment"
+              tools:layout="@layout/layout_bineural"
+              android:label="BineuralFragment"/>
+</navigation>

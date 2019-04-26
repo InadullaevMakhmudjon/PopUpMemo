@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable name="viewmodel"
+                  type="com.example.memo.ui.thirdtab.BineuralViewModel"/>
+    </data>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E2E0E0"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/bineuralContainer"
+            tools:listitem="@layout/item_bineural"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:layout_height="match_parent"
+            tools:itemCount="1"/>
+</RelativeLayout>
+
+</layout>

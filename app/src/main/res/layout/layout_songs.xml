@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="viewmodel"
+                  type="com.example.memo.ui.secondtab.SongViewModel"/>
+    </data>
+
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#E2E0E0"
+        android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="3"
+            android:id="@+id/music_container"
+            tools:listitem="@layout/item_song"
+            android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>
+</layout>
