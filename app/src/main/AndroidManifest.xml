@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.memo">
+          package="com.adnan_hussain.mp">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -8,14 +8,14 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
-            android:name=".ui.App"
+            android:name="com.adnan_hussain.mp.ui.App"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.splash.SplashActivity" android:theme="@style/SplashTheme">
+        <activity android:name="com.adnan_hussain.mp.ui.splash.SplashActivity" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -23,22 +23,22 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.thirdtab.play.PlayActivity"
-                android:parentActivityName=".ui.main.MainActivity">
+                android:name="com.adnan_hussain.mp.ui.thirdtab.play.PlayActivity"
+                android:parentActivityName="com.adnan_hussain.mp.ui.main.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.main.MainActivity"/>
+                    android:value="com.adnan_hussain.mp.ui.main.MainActivity"/>
         </activity>
         <activity
-                android:name=".ui.main.MainActivity"
+                android:name="com.adnan_hussain.mp.ui.main.MainActivity"
                 android:label="@string/app_name">
         </activity>
 
         <service
-                android:name=".service.PopupService"
+                android:name="com.adnan_hussain.mp.service.PopupService"
                 android:enabled="true"/>
         <service
-                android:name=".service.SongService"
+                android:name="com.adnan_hussain.mp.service.SongService"
                 android:enabled="true"/>
     </application>
 

@@ -9,7 +9,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.memo"
+        applicationId "com.adnan_hussain.mp"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1

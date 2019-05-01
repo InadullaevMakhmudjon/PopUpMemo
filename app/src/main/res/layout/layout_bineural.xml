@@ -2,7 +2,7 @@
 <layout>
     <data>
         <variable name="viewmodel"
-                  type="com.example.memo.ui.thirdtab.BineuralViewModel"/>
+                  type="com.adnan_hussain.mp.ui.thirdtab.BineuralViewModel"/>
     </data>
 
 <RelativeLayout

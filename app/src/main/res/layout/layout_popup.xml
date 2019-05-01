@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="viewmodel"
-                  type="com.example.memo.ui.firsttab.PopUpViewModel"/>
+                  type="com.adnan_hussain.mp.ui.firsttab.PopUpViewModel"/>
     </data>
 
 <RelativeLayout
