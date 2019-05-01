@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.memo.R
 import com.example.memo.service.PopupService
 import com.example.memo.ui.App
@@ -52,7 +53,7 @@ class PopUpViewModel(val context:App): ObservableViewModel(context) {
     fun playClick(v: View) {
         if (isMyServiceRunning(PopupService::class.java)) {
             context.stopService(Intent(context, PopupService::class.java))
-            changeImage(v as FloatingActionButton, click)
+            changeImage(v as FloatingActionButton)
             click = false
             prefEdit.putBoolean("button", click)
             prefEdit.apply()
@@ -62,7 +63,7 @@ class PopUpViewModel(val context:App): ObservableViewModel(context) {
                 intent.putExtra("message", getString())
                 context.startService(intent)
 
-                changeImage(v as FloatingActionButton, click)
+                changeImage(v as FloatingActionButton)
                 click = true
                 prefEdit.putBoolean("button", click)
                 prefEdit.apply()
@@ -73,8 +74,8 @@ class PopUpViewModel(val context:App): ObservableViewModel(context) {
 
     }
 
-    fun changeImage(playbutton: FloatingActionButton, isClicked: Boolean) {
-        if (isClicked) {
+    fun changeImage(playbutton: FloatingActionButton) {
+        if (!isMyServiceRunning(PopupService::class.java)) {
             playbutton.setImageDrawable(
                 ContextCompat.getDrawable(
                     context,

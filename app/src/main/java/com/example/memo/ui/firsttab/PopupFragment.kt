@@ -1,7 +1,9 @@
 package com.example.memo.ui.firsttab
 
+import android.app.ActivityManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.SharedPreferences
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -17,6 +19,7 @@ import com.example.memo.data.db.model.Settings
 import com.example.memo.data.preference.SharedPreference
 import com.example.memo.databinding.LayoutPopupBinding
 import com.example.memo.notify.NotificationGenerator
+import com.example.memo.service.PopupService
 import com.example.memo.ui.App
 import com.example.memo.ui.firsttab.adapter.MemoAdapter
 import com.example.memo.util.showMessage
@@ -56,7 +59,7 @@ class PopupFragment : Fragment() {
         })
 
         //Initializing default button icon
-        if(!button){
+        if(!isMyServiceRunning(PopupService::class.java)){
             playbutton.setImageDrawable(
                 ContextCompat.getDrawable(
                     app,
@@ -72,6 +75,17 @@ class PopupFragment : Fragment() {
             )
         }
         itemholder.adapter = adapter
+    }
+
+
+    private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = this.activity!!.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
+        for (service in manager!!.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
 
 }

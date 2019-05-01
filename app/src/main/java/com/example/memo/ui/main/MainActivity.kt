@@ -1,15 +1,20 @@
 package com.example.memo.ui.main
 
+import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.Settings
 import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import androidx.navigation.Navigation
 import com.example.memo.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,10 +44,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val int = intent.getIntExtra("name",2)
+        val pr = PreferenceManager.getDefaultSharedPreferences(this)
+        val edit = pr.edit()
+        edit.putInt("width",this.windowManager.defaultDisplay.width)
+        edit.putInt("height",this.windowManager.defaultDisplay.height)
+        edit.apply()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        if(int==1)
+        var manager = this.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        if(manager.isMusicActive){
             Navigation.findNavController(this,R.id.allcaontainer).navigate(R.id.songFragment)
+        }
 
         checkPermission()
     }

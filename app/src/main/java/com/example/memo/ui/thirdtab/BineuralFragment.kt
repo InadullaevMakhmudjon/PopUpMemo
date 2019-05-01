@@ -37,6 +37,7 @@ class BineuralFragment: Fragment() {
             val intent = Intent(this.context,PlayActivity::class.java)
             intent.putExtra("music_title",it.title)
             intent.putExtra("music_res",it.res)
+            intent.putExtra("music_image_res",it.image)
             this.activity!!.startActivity(intent)
         }
 
@@ -48,15 +49,15 @@ class BineuralFragment: Fragment() {
      */
     fun data():List<Bineural>{
         val list = ArrayList<Bineural>()
-        list.add(Bineural("Concentrate","Content",R.raw.concentrate))
-        list.add(Bineural("Euphoria Induction","Content",R.raw.euphoriainduction))
-        list.add(Bineural("Hemispherical Sync","Content",R.raw.hemisphericalsync))
-        list.add(Bineural("Insomnia","Content",R.raw.insomnia))
-        list.add(Bineural("Memory Booster","Content",R.raw.memorybooster))
-        list.add(Bineural("Problem Solving","Content",R.raw.problemsolving))
-        list.add(Bineural("Relaxation","Content",R.raw.relaxation))
-        list.add(Bineural("Stress Managment","Content",R.raw.stressmanagment))
-        list.add(Bineural("Study and Learn","Content",R.raw.learning))
+        list.add(Bineural("Concentrate","Content",R.raw.concentrate,R.drawable.songbackground))
+        list.add(Bineural("Euphoria Induction","Content",R.raw.euphoriainduction,R.drawable.ic_memo_pad))
+        list.add(Bineural("Hemispherical Sync","Content",R.raw.hemisphericalsync,R.drawable.ic_launcher_background))
+        list.add(Bineural("Insomnia","Content",R.raw.insomnia,R.drawable.ic_dashboard_black_24dp))
+        list.add(Bineural("Memory Booster","Content",R.raw.memorybooster,R.drawable.ic_stop_black_24dp))
+        list.add(Bineural("Problem Solving","Content",R.raw.problemsolving,R.drawable.orange))
+        list.add(Bineural("Relaxation","Content",R.raw.relaxation,R.drawable.ic_writing))
+        list.add(Bineural("Stress Managment","Content",R.raw.stressmanagment,R.drawable.play_black))
+        list.add(Bineural("Study and Learn","Content",R.raw.learning,R.drawable.pause_black))
         return list
     }
 }

@@ -6,20 +6,25 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.graphics.Point
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.preference.PreferenceManager
+import android.support.annotation.RequiresApi
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.TextView
 import com.example.memo.R
+import com.example.memo.util.showMessage
 import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
 
 
 class PopupService: Service() {
+
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -35,7 +40,8 @@ class PopupService: Service() {
     var alpha = 0.5f
     var duration = 100L // in mill seconds
     var frequency = 500L //in mill seconds
-
+    var width=100
+    var height=100
 
     override fun onCreate() {
         pref = PreferenceManager.getDefaultSharedPreferences(this)
@@ -46,6 +52,8 @@ class PopupService: Service() {
         alpha = pref.getFloat("alpha",1F)
         duration = (pref.getInt("duration",1000)).toLong()
         frequency = (pref.getInt("freq",5000)).toLong()
+        width = pref.getInt("width",100)
+        height = pref.getInt("height",100)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -69,11 +77,14 @@ class PopupService: Service() {
 
     class TimeDisplayTimerTask(val wm: WindowManager,val textView: TextView,val service:PopupService) : TimerTask() {
 
+
         val data = service.data
         var isChecked = service.isChecked
         var colorText = service.colorText
         var alpha = service.alpha
         var duration = service.duration
+        val width = service.width
+        val height = service.height
 
         var params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -90,6 +101,9 @@ class PopupService: Service() {
 
         val handler = Handler()
 
+        /**
+         * Text decoration function te decorate text
+         */
         fun textDecoration(textView: TextView) {
             try {
                 textView.textSize = 25f
@@ -104,20 +118,18 @@ class PopupService: Service() {
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun run() {
 
+            /**
+             * Algorithm of displaying popup
+             */
             val runnable = Runnable {
-                val displaymetrics = DisplayMetrics()
 
-                wm.defaultDisplay.getMetrics(displaymetrics)
-                val width = displaymetrics.widthPixels
-                val height = displaymetrics.heightPixels
-
-                params.x = Random.nextInt(width - 10)
-                params.y = Random.nextInt(height - 10)
-                val r = Random
+                params.x = Random.nextInt(width) - Random.nextInt(width)
+                params.y =  Random.nextInt(height) - Random.nextInt(height)
                 if(data!=null)
-                    textView.text = data[r.nextInt(data.size)]
+                    textView.text = data[Random.nextInt(data.size)]
 
                 textDecoration(textView)
 
@@ -142,7 +154,6 @@ class PopupService: Service() {
         }
 
     }
-
 
 
     override fun onDestroy() {

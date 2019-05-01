@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.navigation.Navigation
 import com.example.memo.R
+import com.example.memo.util.showMessage
 import kotlinx.android.synthetic.main.layout_settings.*
 import kotlinx.android.synthetic.main.layout_settings.view.*
 
@@ -66,14 +67,18 @@ class SettingFragment: Fragment() {
             val ischecked = view.checkmessage.isChecked
             val alpha = view.samplemessage.alpha
             val duration = view.duration.text.toString().toInt()
-            val frequency = view.frequency.text.toString().toInt()
-            edit.putInt("color",color)
-            edit.putBoolean("ischecked",ischecked)
-            edit.putFloat("alpha",alpha)
-            edit.putInt("duration",duration)
-            edit.putInt("freq",frequency)
-            edit.apply()
-            Navigation.findNavController(view).navigate(R.id.popupFragment)
+            val frequency = (view.frequency.text.toString().toInt())*1000
+            if(frequency<1 || duration<100){
+                it.showMessage("Please input appropriate value")
+            }else {
+                edit.putInt("color", color)
+                edit.putBoolean("ischecked", ischecked)
+                edit.putFloat("alpha", alpha)
+                edit.putInt("duration", duration)
+                edit.putInt("freq", frequency)
+                edit.apply()
+                Navigation.findNavController(view).navigate(R.id.popupFragment)
+            }
         }
         initialize(view)
         onColorClick(view)
@@ -84,13 +89,15 @@ class SettingFragment: Fragment() {
      */
     fun initialize(v:View){
         v.duration.setText((pref.getInt("duration",1000)).toString())
-        v.frequency.setText((pref.getInt("freq",5000)).toString())
+        v.frequency.setText(((pref.getInt("freq",1000))/1000).toString())
         if((pref.getBoolean("ischecked",false))) v.samplemessage.setBackgroundColor(Color.WHITE)
         else v.samplemessage.setBackgroundColor(Color.TRANSPARENT)
         v.samplemessage.setTextColor(pref.getInt("color",Color.BLACK))
         v.checkmessage.isChecked = pref.getBoolean("ischecked",false)
         v.alphascroll.progress = (pref.getFloat("alpha",1f) * 100).toInt()
     }
+
+    //Uzbekistan
 
     fun onColorClick(v:View){
             v.black.setOnClickListener {

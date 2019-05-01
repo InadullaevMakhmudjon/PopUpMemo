@@ -1,6 +1,8 @@
 package com.example.memo.ui.menu.samples.adpter
 
 import android.content.Context
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,10 +25,13 @@ class SongAdapter(val context: Context): RecyclerView.Adapter<SongViewHolder>() 
             return data.size
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(p0: SongViewHolder, p1: Int) {
             p0.itemView.title_music.text = data[p1].name
+            p0.itemView.music_image.setImageDrawable(context.getDrawable(R.drawable.play_black))
 
             p0.itemView.setOnClickListener {
+             
                 onItemClick?.invoke(data[p1])
             }
         p0.itemView.setOnLongClickListener{

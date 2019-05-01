@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #629755; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.memo.ui.main</span>
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.Settings
+import android.support.annotation.RequiresApi
+import android.support.design.widget.BottomNavigationView
+import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
+import androidx.navigation.Navigation
+import com.example.memo.R
+import kotlinx.android.synthetic.main.activity_main.*
+
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity() {</span>
+
+    private <span class="s0">val </span><span class="s1">mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item -&gt;</span>
+        <span class="s0">when </span><span class="s1">(item.itemId) {</span>
+            R.id.navigation_home -&gt; {
+                Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.popupFragment)</span>
+                <span class="s0">return</span><span class="s1">@OnNavigationItemSelectedListener </span><span class="s0">true</span>
+            <span class="s1">}</span>
+            R.id.navigation_dashboard -&gt; {
+                Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.songFragment)</span>
+                <span class="s0">return</span><span class="s1">@OnNavigationItemSelectedListener </span><span class="s0">true</span>
+            <span class="s1">}</span>
+            R.id.navigation_notifications -&gt; {
+                Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.bineuralFragment)</span>
+                <span class="s0">return</span><span class="s1">@OnNavigationItemSelectedListener </span><span class="s0">true</span>
+            <span class="s1">}</span>
+        }
+        <span class="s0">false</span>
+    <span class="s1">}</span>
+    @RequiresApi(Build.VERSION_CODES.M)
+    override <span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        setContentView(R.layout.activity_main)
+        <span class="s0">val </span><span class="s1">int = intent.getIntExtra(</span><span class="s2">&quot;name&quot;</span><span class="s0">,</span><span class="s3">2</span><span class="s1">)</span>
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        <span class="s0">if</span><span class="s1">(int==</span><span class="s3">1</span><span class="s1">)</span>
+            Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.songFragment)</span>
+
+        checkPermission()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    <span class="s0">fun </span><span class="s1">checkPermission(){</span>
+        <span class="s0">if </span><span class="s1">(!Settings.canDrawOverlays(</span><span class="s0">this</span><span class="s1">)) {</span>
+            <span class="s0">val </span><span class="s1">intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION</span><span class="s0">, </span><span class="s1">Uri.parse(</span><span class="s2">&quot;package:</span><span class="s0">$</span><span class="s1">packageName</span><span class="s2">&quot;</span><span class="s1">))</span>
+            startActivityForResult(intent<span class="s0">, </span><span class="s3">0</span><span class="s1">)</span>
+        }
+    }
+
+    override <span class="s0">fun </span><span class="s1">onCreateOptionsMenu(menu: Menu?): Boolean {</span>
+        menuInflater.inflate(R.menu.main<span class="s0">,</span><span class="s1">menu)</span>
+        <span class="s0">return true</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/**</span>
+     * Options item selected, when you click on UI
+     */
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onOptionsItemSelected(item: MenuItem?): Boolean {</span>
+        <span class="s0">when</span><span class="s1">(item?.itemId){</span>
+            R.id.example-&gt;{
+                Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.sampleMessageFragment)</span>
+            }
+            R.id.docs-&gt;{
+                Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.docsFragment)</span>
+            }
+            R.id.settings-&gt;{
+                Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.settingFragment)</span>
+            }
+            R.id.about-&gt;{
+                Navigation.findNavController(<span class="s0">this,</span><span class="s1">R.id.allcaontainer).navigate(R.id.aboutFragment)</span>
+            }
+        }
+        <span class="s0">return true</span>
+    <span class="s1">}</span>
+
+}
+</pre>
+</body>
+</html>

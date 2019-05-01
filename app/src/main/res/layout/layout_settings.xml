@@ -42,8 +42,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
-                    android:layout_width="120dp"
-                    android:hint="Duration"
+                    android:layout_width="140dp"
+                    android:hint="Duration(ms)"
                     android:id="@+id/duration"
                     android:inputType="numberSigned"
                     android:layout_margin="10dp"
@@ -57,8 +57,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
-                    android:layout_width="120dp"
-                    android:hint="Frequency"
+                    android:layout_width="140dp"
+                    android:hint="Frequency(s)"
                     android:id="@+id/frequency"
                     android:layout_margin="10dp"
                     android:inputType="numberSigned"

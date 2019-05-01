@@ -9,11 +9,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toolbar
 import com.example.memo.R
+import kotlinx.android.synthetic.main.activity_play.*
 
 class PlayActivity : AppCompatActivity() {
 
     var music_title=""
-    var music_content=""
+    var music_image_res=R.drawable.play_black
     var music_res=R.raw.music1
 
     lateinit var mp:MediaPlayer
@@ -25,10 +26,13 @@ class PlayActivity : AppCompatActivity() {
 
         music_title = intent.getStringExtra("music_title")
         music_res = intent.getIntExtra("music_res",R.raw.music1)
+        music_image_res = intent.getIntExtra("music_image_res",R.drawable.pause_black)
         supportActionBar?.title = music_title
-
+        main.setBackgroundResource(music_image_res)
         mp = MediaPlayer.create(this,music_res)
         mp.start()
+
+        mp.isLooping = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,6 +51,13 @@ class PlayActivity : AppCompatActivity() {
                     item.icon = getDrawable(R.drawable.ic_pause)
                     mp.start()
                 }
+            }
+            R.id.navigation_repeat->{
+                if(mp.isPlaying) {
+                    mp.stop()
+                    mp.prepare()
+                }
+                mp.start()
             }
             android.R.id.home->{
                 finish()
