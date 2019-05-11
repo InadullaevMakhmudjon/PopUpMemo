@@ -6,12 +6,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:background="#E2E0E0"
         android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
+    <ExpandableListView
             android:layout_width="match_parent"
-            android:id="@+id/samplesContainer"
-            tools:listitem="@layout/item_sample_message"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:layout_height="match_parent"
+            android:divider="#A4C739"
+            android:id="@+id/expandableParent"
+            android:dividerHeight="0.5dp" >
+    </ExpandableListView>
 </RelativeLayout>
