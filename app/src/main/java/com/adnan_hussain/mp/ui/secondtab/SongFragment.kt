@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.layout_songs.*
 class SongFragment : Fragment() {
 
         lateinit var binding:LayoutSongsBinding
-
+        var condition=0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.layout_songs,container,false)
@@ -38,22 +39,41 @@ class SongFragment : Fragment() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         val adapter = SongAdapter(this.context!!)
+        val pref = PreferenceManager.getDefaultSharedPreferences(this.context)
+        val editor = pref.edit()
+        condition = pref.getInt("condition",0)
 
         adapter.setValue(getlist())
         val intent = Intent(this.context,SongService::class.java)
 
-        adapter.onItemClick = {
+        adapter.onItemClick = {item,data,state->
             if(isMyServiceRunning(SongService::class.java))
                 this.activity!!.stopService(intent)
 
-            intent.putExtra("name",it.name)
-            intent.putExtra("resource",it.resource)
+            intent.putExtra("name",item.name)
+            intent.putExtra("resource",item.resource)
+            intent.putExtra("condition",item.condition)
+            intent.putExtra("id",item.id)
+            editor.apply()
+
+            adapter.setValue(data)
             this.activity!!.startService(intent)
         }
 
         adapter.onLongClick = {
             this.activity!!.stopService(intent)
         }
+
+        adapter.onRepeateClick = {data,index->
+            data.forEach {
+                 if(it.id != data[index].id) it.condition = 0
+            }
+            adapter.setValue(data)
+
+            editor.putInt("condition",data[index].condition)
+            editor.apply()
+        }
+
         music_container.adapter = adapter
 
 
@@ -77,10 +97,10 @@ class SongFragment : Fragment() {
      */
     fun getlist():List<Music>{
         val list = ArrayList<Music>()
-        list.add(Music("Hello", R.raw.music1))
-        list.add(Music("Goodbye",R.raw.music2))
-        list.add(Music("How",R.raw.music3))
-        list.add(Music("Wonderful",R.raw.music4))
+        for(a in 1..4){
+            val resID = resources.getIdentifier("music$a", "raw", this.activity!!.packageName)
+            list.add(Music(a,"Hello $a", resID, R.drawable.play_black,condition))
+        }
         return list
     }
 

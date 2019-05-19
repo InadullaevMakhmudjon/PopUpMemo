@@ -2,13 +2,85 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView android:layout_width="wrap_content"
-              android:text="This is Email Link"
-              android:textSize="20sp"
-              android:id="@+id/contactMail"
-              android:textColor="@android:color/holo_blue_dark"
-              android:layout_centerInParent="true"
-              android:layout_height="wrap_content"/>
+
+    <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:id="@+id/letter"
+            app:cardElevation="10dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardCornerRadius="20dp"
+            android:layout_height="200dp">
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+            <ImageView android:layout_width="match_parent"
+                       android:src="@drawable/funny1"
+                       android:scaleType="fitXY"
+                       android:layout_above="@id/sometext"
+                       android:layout_height="match_parent"/>
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/sometext"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+                  android:textSize="20sp"
+                  android:text="BlaBlabalsdk asjdnas asdkjasndkj"
+                  android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </android.support.design.card.MaterialCardView>
+
+    <android.support.design.card.MaterialCardView
+            android:layout_below="@id/letter"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:weightSum="2"
+                      android:orientation="horizontal"
+                      android:layout_height="match_parent">
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/rate"
+                            android:layout_height="match_parent">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_centerInParent="true"
+                           android:id="@+id/icon"
+                           android:src="@drawable/ic_star_black_24dp"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_centerHorizontal="true"
+                          android:layout_below="@+id/icon"
+                          android:text="Rate"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/Container"
+                            android:layout_height="match_parent">
+
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_centerInParent="true"
+                               android:id="@+id/iconemail"
+                               android:src="@drawable/ic_email_black_24dp"
+                               android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:id="@+id/contactMail"
+                              android:layout_centerHorizontal="true"
+                              android:layout_below="@+id/iconemail"
+                              android:text="Rate"
+                              android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.design.card.MaterialCardView>
+
 </RelativeLayout>

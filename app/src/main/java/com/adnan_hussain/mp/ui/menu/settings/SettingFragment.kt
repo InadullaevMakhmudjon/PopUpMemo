@@ -88,11 +88,11 @@ class SettingFragment: Fragment() {
      * Initializing default values
      */
     fun initialize(v:View){
-        v.duration.setText((pref.getInt("duration",1000)).toString())
+        v.duration.setText((pref.getInt("duration",300)).toString())
         v.frequency.setText(((pref.getInt("freq",1000))/1000).toString())
         if((pref.getBoolean("ischecked",false))) v.samplemessage.setBackgroundColor(Color.WHITE)
         else v.samplemessage.setBackgroundColor(Color.TRANSPARENT)
-        v.samplemessage.setTextColor(pref.getInt("color",Color.BLACK))
+        v.samplemessage.setTextColor(pref.getInt("color",Color.RED))
         v.checkmessage.isChecked = pref.getBoolean("ischecked",false)
         v.alphascroll.progress = (pref.getFloat("alpha",1f) * 100).toInt()
     }

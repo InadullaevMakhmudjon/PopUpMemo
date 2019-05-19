@@ -15,7 +15,7 @@ class PlayActivity : AppCompatActivity() {
     var music_title=""
     var music_image_res=R.drawable.play_black
     var music_res=R.raw.music1
-
+    var isLooping = false
     lateinit var mp:MediaPlayer
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -30,8 +30,7 @@ class PlayActivity : AppCompatActivity() {
         main.setBackgroundResource(music_image_res)
         mp = MediaPlayer.create(this,music_res)
         mp.start()
-
-        mp.isLooping = true
+        mp.isLooping = isLooping
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,6 +49,13 @@ class PlayActivity : AppCompatActivity() {
                     item.icon = getDrawable(R.drawable.ic_pause)
                     mp.start()
                 }
+            }
+            R.id.loops->{
+                isLooping = !isLooping
+                if(isLooping) item.setIcon(R.drawable.ic_repeat_one_black_24dp)
+                else item.setIcon(R.drawable.ic_repeat_white_black_24dp)
+                mp.isLooping = isLooping
+
             }
             R.id.navigation_repeat->{
                 if(mp.isPlaying) {

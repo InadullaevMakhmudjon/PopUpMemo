@@ -26,6 +26,8 @@ class SongService: Service() {
 
         val mName = intent?.getStringExtra("name")
         val mres = intent?.getIntExtra("resource",R.raw.music1)
+        val condition = intent?.getIntExtra("condition",0)
+        var id = intent?.getIntExtra("id",1)
 
         val intent = Intent(this,MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this,0,intent,0)
@@ -42,17 +44,30 @@ class SongService: Service() {
             .build()
 
 
+        when(condition){
+            0->{ //Condition when looping is dissable
+                mp = if(mres!=null) {
+                    MediaPlayer.create(this, mres)
+                } else
+                    MediaPlayer.create(this,R.raw.music1)
 
-        mp = if(mres!=null) {
-            MediaPlayer.create(this, mres)
-        } else
-            MediaPlayer.create(this,R.raw.music1)
+                mp.setOnCompletionListener {
+                    stopSelf()
+                }
+            }
+            1->{//Condition when looping is one song
+                mp = if(mres!=null) {
+                    MediaPlayer.create(this, mres)
+                } else
+                    MediaPlayer.create(this,R.raw.music1)
+
+                mp.setOnCompletionListener {
+                    mp.start()
+                }
+            }
+        }
 
         mp.start()
-
-        mp.setOnCompletionListener {
-            stopSelf()
-        }
 
         startForeground(1,notification)
         return START_NOT_STICKY

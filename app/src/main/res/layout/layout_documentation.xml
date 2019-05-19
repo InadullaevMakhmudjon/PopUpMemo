@@ -4,10 +4,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView android:layout_width="wrap_content"
-              android:text="Docs"
-              android:textSize="90sp"
-              android:layout_centerInParent="true"
-              android:layout_height="wrap_content"/>
+    <ExpandableListView
+            android:layout_width="match_parent"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:layout_height="match_parent"
+            android:divider="#A4C739"
+            android:id="@+id/expandabledocs"
+            android:dividerHeight="0.5dp" >
+    </ExpandableListView>
 
 </RelativeLayout>

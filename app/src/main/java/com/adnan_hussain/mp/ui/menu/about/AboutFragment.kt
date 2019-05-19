@@ -1,5 +1,7 @@
 package com.adnan_hussain.mp.ui.menu.about
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Html
@@ -18,9 +20,15 @@ class AboutFragment:Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        @Suppress("DEPRECATION")
-        view.contactMail.text = fromHtml1("<a style=\"color: #FFF; \" href=\"mailto:adnan.hussain@example.com\">Click me</a>")
-        view.contactMail.movementMethod = LinkMovementMethod.getInstance()
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.data = Uri.parse("Email")
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("example@example.com"))
+        intent.type = "message/rfc822"
+        val launcher = Intent.createChooser(intent,"Launch Email")
+        view.Container.setOnClickListener {
+            startActivity(launcher)
+        }
+
     }
 
 }

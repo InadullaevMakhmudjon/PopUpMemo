@@ -1,45 +1,42 @@
-package com.adnan_hussain.mp.ui.menu.samples.expanded
+package com.adnan_hussain.mp.ui.menu.docs.adapter
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import android.widget.ListAdapter
 import android.widget.TextView
 import com.adnan_hussain.mp.R
-import com.adnan_hussain.mp.util.showMessage
 
-class ExpandedMessageAdapter(val context: Context,
-                             private val expandableTitels: List<String>,
-                             private val expandableData: HashMap<String, List<String>>): BaseExpandableListAdapter(){
+class ExpandableAdapter(val context: Context,
+                          private val expandableTitels: List<String>,
+                          private val expandableData: HashMap<String, List<String>>): BaseExpandableListAdapter() {
+
     //Total titles of expandable list
     override fun getGroup(groupPosition: Int): Any {
-            return expandableTitels[groupPosition]
+        return expandableTitels[groupPosition]
     }
 
     //Whether child accessible
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean {
-            return true
+        return true
     }
 
     override fun hasStableIds(): Boolean {
-            return false
+        return false
     }
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
         val title:String = getGroup(groupPosition) as String
 
-       return if(convertView != null){
+        return if(convertView != null){
             val titleText = convertView.findViewById<View>(R.id.listTitle) as TextView
             titleText.setTypeface(null, Typeface.BOLD)
             titleText.text = title
             convertView
         }else{
-           val v = LayoutInflater.from(context).inflate(R.layout.message_expandable_group,null)
+            val v = LayoutInflater.from(context).inflate(R.layout.message_expandable_group,null)
             val titleText = v.findViewById<View>(R.id.listTitle) as TextView
             titleText.setTypeface(null, Typeface.BOLD)
             titleText.text = title
@@ -48,8 +45,8 @@ class ExpandedMessageAdapter(val context: Context,
     }
 
     override fun getChildrenCount(groupPosition: Int): Int {
-            val data = expandableData[expandableTitels[groupPosition]]
-            return data?.size ?: 0
+        val data = expandableData[expandableTitels[groupPosition]]
+        return data?.size ?: 0
     }
 
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
@@ -74,26 +71,12 @@ class ExpandedMessageAdapter(val context: Context,
             val titleText = convertView.findViewById<View>(R.id.messageExpandedItem) as TextView
             titleText.setTypeface(null, Typeface.BOLD)
             titleText.text = childText
-
-            convertView.setOnClickListener {
-                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
-                val clip = ClipData.newPlainText(childText,childText)
-                clipboard!!.primaryClip = clip
-            }
-
             convertView
         }else{
             val view = LayoutInflater.from(context).inflate(R.layout.message_expandable_item,null)
             val titleText = view.findViewById<View>(R.id.messageExpandedItem) as TextView
             titleText.setTypeface(null, Typeface.BOLD)
             titleText.text = childText
-
-            view.setOnClickListener {
-                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
-                val clip = ClipData.newPlainText(childText,childText)
-                clipboard!!.primaryClip = clip
-            }
-
             view
         }
     }
@@ -105,4 +88,5 @@ class ExpandedMessageAdapter(val context: Context,
     override fun getGroupCount(): Int {
         return expandableTitels.size
     }
+
 }
