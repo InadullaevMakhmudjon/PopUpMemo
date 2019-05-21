@@ -29,6 +29,12 @@ class AboutFragment:Fragment() {
             startActivity(launcher)
         }
 
+        view.rate.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("http://www.yahoo.com")
+            startActivity(intent)
+        }
+
     }
 
 }
