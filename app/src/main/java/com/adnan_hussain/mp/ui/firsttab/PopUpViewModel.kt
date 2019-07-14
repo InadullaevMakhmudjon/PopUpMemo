@@ -28,6 +28,7 @@ class PopUpViewModel(val context:App): ObservableViewModel(context) {
 
     var allMemoes = repository.allData
     var settings = repository.settings
+    var canLoad = MutableLiveData<Boolean>()
 
     var click = pref.getBoolean("button", false)
 
@@ -40,8 +41,15 @@ class PopUpViewModel(val context:App): ObservableViewModel(context) {
 
         dialog.setCancelable(true)
         button.setOnClickListener {
-            repository.insert(text.toString())
-            dialog.dismiss()
+            if(text.toString().isNotEmpty()) {
+                if(canLoad.value!!)
+                    repository.insert(text.toString())
+                else
+                    it.showMessage("Out of limit")
+                dialog.dismiss()
+            }else{
+                v.showMessage("Please insert something")
+            }
         }
         dialog.show()
     }

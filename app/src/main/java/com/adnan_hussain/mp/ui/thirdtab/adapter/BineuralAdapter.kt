@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.adnan_hussain.mp.R
 import com.adnan_hussain.mp.data.db.model.Bineural
+import com.adnan_hussain.mp.util.showMessage
 import kotlinx.android.synthetic.main.item_bineural.view.*
 
 class BineuralAdapter: RecyclerView.Adapter<BineuralViewHolder>() {
@@ -30,7 +31,7 @@ class BineuralAdapter: RecyclerView.Adapter<BineuralViewHolder>() {
         p0.itemView.title.text = data[p1].title
         p0.itemView.content.text = data[p1].content
         p0.itemView.setOnClickListener {
-            itemClick?.invoke(data[p1])
+            it.showMessage("Please Upgrade")
         }
     }
 

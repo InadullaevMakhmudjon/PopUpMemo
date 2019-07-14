@@ -15,6 +15,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.Navigation
 import com.adnan_hussain.mp.R
+import com.adnan_hussain.mp.util.showDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -23,14 +24,17 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+                this.showDialog("Please Upgrade", "if you want to update your app, please go ..")
                 Navigation.findNavController(this,R.id.allcaontainer).navigate(R.id.popupFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
+                this.showDialog("Please Upgrade","if you want to update your app, please go ..")
                 Navigation.findNavController(this,R.id.allcaontainer).navigate(R.id.songFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
+                this.showDialog("Please Upgrade","if you want to update your app, please go ..")
                 Navigation.findNavController(this,R.id.allcaontainer).navigate(R.id.bineuralFragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -48,12 +52,7 @@ class MainActivity : AppCompatActivity() {
         edit.putInt("height",this.windowManager.defaultDisplay.height)
         edit.apply()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        var manager = this.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        if(manager.isMusicActive){
-            Navigation.findNavController(this,R.id.allcaontainer).navigate(R.id.songFragment)
-        }
-
+        
         checkPermission()
     }
 

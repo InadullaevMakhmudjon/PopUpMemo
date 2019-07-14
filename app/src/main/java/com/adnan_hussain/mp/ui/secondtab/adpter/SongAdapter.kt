@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.adnan_hussain.mp.R
 import com.adnan_hussain.mp.data.db.model.Music
+import com.adnan_hussain.mp.util.showMessage
 import kotlinx.android.synthetic.main.item_song.view.*
 
 
@@ -33,7 +34,8 @@ class SongAdapter(val context: Context): RecyclerView.Adapter<SongViewHolder>() 
 
 
             p0.itemView.setOnClickListener {
-                onItemClick?.invoke(data[p1],data,p1)
+                //onItemClick?.invoke(data[p1],data,p1)
+                it.showMessage("Please Upgrade")
             }
 
            p0.itemView.setOnLongClickListener{

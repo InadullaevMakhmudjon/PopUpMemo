@@ -17,6 +17,7 @@ import com.adnan_hussain.mp.databinding.LayoutPopupBinding
 import com.adnan_hussain.mp.service.PopupService
 import com.adnan_hussain.mp.ui.App
 import com.adnan_hussain.mp.ui.firsttab.adapter.MemoAdapter
+import com.adnan_hussain.mp.util.showMessage
 import kotlinx.android.synthetic.main.layout_popup.*
 
 class PopupFragment : Fragment() {
@@ -47,7 +48,10 @@ class PopupFragment : Fragment() {
 
         //Observer, listens to database change
         viewModel.allMemoes.observe(this, Observer {
-            if(it!=null) adapter.loadData(it)
+            if(it!=null){
+                viewModel.canLoad.value = it.size + 1 <= 5
+                adapter.loadData(it)
+            }
         })
 
         //Initializing default button icon
